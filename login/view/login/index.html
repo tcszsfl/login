@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title> Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+        <link rel="stylesheet" href="../../../public/assets/css/reset.css">
+        <link rel="stylesheet" href="../../../public/assets/css/supersized.css">
+        <link rel="stylesheet" href="../../../public/assets/css/style.css">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div class="page-container">
+            <h1>Login</h1>
+            <form id="form" onsubmit="return false"  method="post">
+                <input type="text"   name="username" class="username" placeholder="username">
+                <input type="password"   name="password" class="password" placeholder="Password">
+                <label>免登录</label><input type="checkbox" name="ischecks" value="1">
+                <button  type="submit">Sign me in</button>
+                <div class="error"><span>+</span></div>
+            </form>
+            
+        </div>
+       
+
+        <!-- Javascript -->
+        <script src="../../../public/assets/js/jquery-1.8.2.min.js"></script>
+        <script src="../../../public/assets/js/supersized.3.2.7.min.js"></script>
+        <script src="../../../public/assets/js/supersized-init.js"></script>
+        <script src="../../../public/assets/js/scripts.js"></script>
+        <script src="../../../public/assets/js/layer/layer.js"></script>
+      <script type="text/javascript">
+   $('#form').submit(function(){
+        $.ajax({
+            url:"{:url('Login/dologin')}",
+            type:'POST',
+            data:$('#form').serialize(),
+            success:function(result){
+                switch(result.status){
+                    case 1:layer.msg(result.msg, {
+                                 anim: 0
+                              });
+                            setInterval(function () {
+                            location.href="{:url('Index/index')}";
+                            },1000);
+                    case 2 :layer.msg(result.msg, {
+                                 anim: 0
+                              });break;
+                    case 3 :layer.msg(result.msg, {
+                                 anim: 0
+                              });break;
+                }
+            },
+            error:function(){
+                layer.msg('错误');
+            },
+
+        });
+    });
+    </script>
+    </body>
+
+</html>
+
