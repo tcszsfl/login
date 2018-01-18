@@ -9,7 +9,7 @@ class Index extends Common
 {
 	public function Index()
 	{
-		echo "前台页面： " . cookie('user_name') . ', <a href="' . url('login/loginout') . '">退出</a>';
+		echo "用户页面： " . cookie('user_name') . ', <a href="' . url('login/loginout') . '">退出</a>';
 	}
 	// public function hello()
 	// {
